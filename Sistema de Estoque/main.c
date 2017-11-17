@@ -274,7 +274,7 @@ void excluirProduto(struct MemoriaEstoque *estoque, int *quantidade){
 
         }else{
 
-            system("cls");
+        system("cls");
         printf("\n\n");
         printf("   EXCLUIR PRODUTO\n\n");
         printf("께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께");
@@ -332,6 +332,70 @@ void excluirProduto(struct MemoriaEstoque *estoque, int *quantidade){
 
 }
 
+void exibirRelatorioSimples(struct MemoriaEstoque *estoque, int *quantidade){
+
+    int i, lim = *quantidade -1, troca;
+    struct MemoriaEstoque aux;
+
+    if(*quantidade == 0){
+        system("cls");
+        printf("NAO EXISTEM PRODUTOS EM ESTOQUE!\n\n");
+        Sleep(2000);
+    }else{
+
+        system("cls");
+        printf("\n\n");
+        printf("   RELATORIO DO ESTOQUE\n\n");
+        printf("께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께");
+        printf("께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께");
+        printf("께께께�               M E N U    R E L A T O R I O    D E   P R O D U T O S                  께께께�");
+        printf("께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께");
+        printf("께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께");
+        printf("\n\n");
+
+        if(*quantidade > 1){
+
+            // METODO BOLHA PARA ORDENAR AS STRUCT PELA CODIGO DO PRODUTO
+            do{
+                troca = 0;
+                for(i = 0; i<= lim-1; i++){
+
+                    if(estoque[i].codigo > estoque[i+1].codigo){
+
+                        aux = estoque[i];
+                        estoque[i] = estoque[i+1];
+                        estoque[i+1] = aux;
+                        troca = 1;
+                    }
+                }
+                lim = lim - 1;
+            }while(troca == 1);
+
+                printf("                   ====================== L I S T A ============================\n\n");
+
+            for(i=0; i < *quantidade; i++){
+                printf("\n\n");
+                printf("=====================================\n");
+                printf("CODIGO: %i\n", estoque[i].codigo);
+                printf("\n");
+                printf("NOME: %s\n", estoque[i].nome);
+                printf("====================================\n");
+
+          }
+            system("pause");
+        }else{
+
+            printf("\n\n");
+            printf("===================================\n");
+            printf("CODIGO: %i\n", estoque[*quantidade-1].codigo);
+            printf("\n");
+            printf("NOME: %s\n", estoque[*quantidade-1].nome);
+            printf("===================================\n");
+            system("pause");
+        }
+    }
+}
+
 int main()
 {
 
@@ -342,7 +406,7 @@ int main()
     int op = 0, quantidade = 0;
 
     do{
-
+        system("cls");
         menu(&op, quantidade);
 
         switch(op){
@@ -363,11 +427,12 @@ int main()
             break;
 
         case 4:
-
+                system("cls");
+                exibirRelatorioSimples(cadastros, &quantidade);
             break;
 
         case 5:
-
+                system("cls");
             break;
 
         case 6:
