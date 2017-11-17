@@ -396,6 +396,99 @@ void exibirRelatorioSimples(struct MemoriaEstoque *estoque, int *quantidade){
     }
 }
 
+void exibirRelatorioCompleto(struct MemoriaEstoque *estoque, int *quantidade){
+
+    int i, lim = *quantidade -1, troca;
+    struct MemoriaEstoque aux;
+
+    if(*quantidade == 0){
+        system("cls");
+        printf("NAO EXISTEM PRODUTOS EM ESTOQUE!\n\n");
+        Sleep(2000);
+    }else{
+
+        system("cls");
+        printf("\n\n");
+        printf("   RELATORIO DO ESTOQUE\n\n");
+        printf("께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께");
+        printf("께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께");
+        printf("께께께�               M E N U    R E L A T O R I O    D E   P R O D U T O S                  께께께�");
+        printf("께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께");
+        printf("께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께께");
+        printf("\n\n");
+
+        if(*quantidade > 1){
+
+            // METODO BOLHA PARA ORDENAR AS STRUCT PELA CODIGO DO PRODUTO
+            do{
+                troca = 0;
+                for(i = 0; i<= lim-1; i++){
+
+                    if(estoque[i].codigo > estoque[i+1].codigo){
+
+                        aux = estoque[i];
+                        estoque[i] = estoque[i+1];
+                        estoque[i+1] = aux;
+                        troca = 1;
+                    }
+                }
+                lim = lim - 1;
+            }while(troca == 1);
+
+                printf("                   ====================== L I S T A ============================\n\n");
+
+            for(i=0; i < *quantidade; i++){
+                printf("\n\n");
+                printf("=====================================\n");
+                printf("CODIGO: %i\n", estoque[i].codigo);
+                printf("\n");
+                printf("NOME: %s\n", estoque[i].nome);
+                printf("\n");
+                printf("QUANTIDADE EM ESTOQUE: %i", estoque[i].qtdEstoque);
+                printf("\n");
+                printf("PRECO UNITARIO DE CUSTO: %.2f", estoque[i].precoCusto);
+                printf("\n");
+                printf("PRECO UNITARIO DE VENDA: %.2f", estoque[i].precoVenda);
+                printf("\n");
+                printf("QUANTIDADE VENDIDA: %i", estoque[i].qtdVendida);
+                printf("\n");
+                printf("VALOR TOTAL DO PRODUTO EM ESTOQUE: %.2f", estoque[i].precoCusto * estoque[i].qtdEstoque);
+                printf("\n");
+                printf("VALOR TOTAL POR VALOR DE VENDA: %.2f", estoque[i].precoVenda * estoque[i].qtdEstoque);
+                printf("\n");
+                printf("LUCRO TOTAL POR ESTOQUE DE PRODUTO PRODUTO: %.2f", (estoque[i].precoVenda * estoque[i].qtdEstoque) - (estoque[i].precoCusto * estoque[i].qtdEstoque));
+                printf("====================================\n");
+
+          }
+            system("pause");
+        }else{
+
+            printf("\n\n");
+            printf("===================================\n");
+            printf("CODIGO: %i\n", estoque[*quantidade-1].codigo);
+            printf("\n");
+            printf("NOME: %s\n", estoque[*quantidade-1].nome);
+            printf("\n");
+            printf("QUANTIDADE EM ESTOQUE: %i", estoque[*quantidade-1].qtdEstoque);
+            printf("\n");
+            printf("PRECO UNITARIO DE CUSTO: %.2f", estoque[*quantidade-1].precoCusto);
+            printf("\n");
+            printf("PRECO UNITARIO DE VENDA: %.2f", estoque[*quantidade-1].precoVenda);
+            printf("\n");
+            printf("QUANTIDADE VENDIDA: %i", estoque[*quantidade-1].qtdVendida);
+            printf("\n");
+            printf("VALOR TOTAL DO PRODUTO EM ESTOQUE: %.2f", estoque[*quantidade-1].precoCusto * estoque[*quantidade-1].qtdEstoque);
+            printf("\n");
+            printf("VALOR TOTAL POR VALOR DE VENDA: %.2f", estoque[*quantidade-1].precoVenda * estoque[*quantidade-1].qtdEstoque);
+            printf("\n");
+            printf("LUCRO TOTAL POR ESTOQUE DE PRODUTO PRODUTO: %.2f", (estoque[*quantidade-1].precoVenda * estoque[*quantidade-1].qtdEstoque) - (estoque[*quantidade-1].precoCusto * estoque[*quantidade-1].qtdEstoque));
+            printf("===================================\n");
+            system("pause");
+        }
+    }
+
+}
+
 int main()
 {
 
@@ -433,6 +526,7 @@ int main()
 
         case 5:
                 system("cls");
+                exibirRelatorioCompleto(cadastros, &quantidade);
             break;
 
         case 6:
